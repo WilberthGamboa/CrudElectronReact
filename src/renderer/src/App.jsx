@@ -1,65 +1,35 @@
+import { useState } from "react";
 import { AddUser } from "./components/addUser/AddUser";
+import { TitleForm } from "./components/addUser/components/TitleForm";
+import { UserView } from "./components/userView/UserView";
+function App() {  
 
-/*
-import Title from "antd/es/typography/Title";
-import { InputComponent } from "./components/InputComponent";
-import { FormMercanciaVendida } from "./components/FormMercanciaVendida";
-*/
+  const [visibilidad, setvisibilidad] = useState(false);
 
-function App() {
-  /*
-
-  const [values, setvalues] = useState({
-    nombre: '',
-    apellido:'',
-    urlFoto: ''
-  })
-
-  const {nombre, apellido, urlFoto} = values;
-  const onChange = ({target}) => {
-    const {name,value} = target;
-    setvalues({
-      ...values,
-      [name]:value
-    })
-   
-  };
-  const onSave = async (values) =>{
-    console.log(values);
-    await window.electronFront.guardarInformacion(values)
+  const onSetViewTrue = () =>{
+    setvisibilidad(true)
   }
-  */
+
+  const onSetViewFalse = () =>{
+    setvisibilidad(false)
+  }
+
+
+  const renderizarComponente = () =>{
+    if(visibilidad){
+     return  <UserView/> 
+    }else{
+     return  <AddUser/>
+    }
+  }
   return (
-
     <>
-    <AddUser/>
-    
-    
+    <TitleForm onSetViewFalse={onSetViewFalse} onSetViewTrue={onSetViewTrue} />
+    {
+     renderizarComponente()
+
+    }
     </>
-
-    /*
-    <>
-    <Title direction="vertical" align="center">Simple crud</Title>
-    <Row justify="center" align="middle" style={{ height: '70vh' }}>
-      <Col span={12}>
-        <Input showCount maxLength={20} onChange={onChange} name="nombre" value={nombre} />
-        <br />
-        <br />
-        <Input showCount maxLength={20} onChange={onChange} name="apellido" value={apellido} />
-        <br />
-        <br />
-        <Input showCount maxLength={20} onChange={onChange} name="urlFoto"  value={urlFoto}/>
-        <br />
-        <br />
-      </Col>
-    </Row>
-    <div direction="vertical" align="center">
-    <Button  onClick={()=>onSave(values)} type="primary">Primary Button</Button>
-    </div>
-
-
-  </>
-*/
   )
 }
 

@@ -1,12 +1,10 @@
 import { Button, Input } from 'antd';
-const onChange = (e) => {
-  console.log('Change:', e.target.value);
-};
 
-export const InputComponent = () => {
+
+export const InputComponent = ({onInputChange,name,placeholder}) => {
   return (
     <>
-    <Input showCount maxLength={20} onChange={onChange} />
+    <Input showCount maxLength={20} onChange={(e) => onInputChange(e,name)} placeholder={placeholder} />
     <br />
     <br />  
   </>

@@ -17,9 +17,18 @@ try {
   
   console.log('Nuevo usuario guardado:', usuarioGuardado.toJSON());
 } catch (error) {
-  console.error('Error al guardar el usuario:');
+  console.error('Error al guardar el usuario:'+error);
 }
 }
+const obtenerUsuarioById = async() =>{
+  try{
+   const usuarioById = await Usuario.findByPk(1);
+   console.log(usuarioById);
+  }catch(error){
+   
+  }
+ }
+
 
 function createWindow() {
   // Create the browser window.
@@ -31,7 +40,9 @@ function createWindow() {
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+     
+
     }
   })
 
@@ -80,6 +91,7 @@ app.whenReady().then(() => {
   //ELECTRON LLAMADAS
 
 ipcMain.on('postData',llamarNode)
+ipcMain.on('getData',obtenerUsuarioById)
 
 
 
