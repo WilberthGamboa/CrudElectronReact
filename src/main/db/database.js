@@ -1,5 +1,4 @@
 import { app } from 'electron'
-
 const path = require('path');
 
 // Configura el directorio de datos de SQLite

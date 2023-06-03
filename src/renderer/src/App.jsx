@@ -1,6 +1,4 @@
-import { Button, Col, Input, Row } from "antd";
-import Title from "antd/es/typography/Title";
-import { useState } from "react";
+import { AddUser } from "./components/addUser/AddUser";
 
 /*
 import Title from "antd/es/typography/Title";
@@ -9,6 +7,7 @@ import { FormMercanciaVendida } from "./components/FormMercanciaVendida";
 */
 
 function App() {
+  /*
 
   const [values, setvalues] = useState({
     nombre: '',
@@ -29,7 +28,16 @@ function App() {
     console.log(values);
     await window.electronFront.guardarInformacion(values)
   }
+  */
   return (
+
+    <>
+    <AddUser/>
+    
+    
+    </>
+
+    /*
     <>
     <Title direction="vertical" align="center">Simple crud</Title>
     <Row justify="center" align="middle" style={{ height: '70vh' }}>
@@ -51,7 +59,7 @@ function App() {
 
 
   </>
-
+*/
   )
 }
 

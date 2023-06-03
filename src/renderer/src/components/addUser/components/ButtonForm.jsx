@@ -5,10 +5,9 @@ export const ButtonForm = () => {
         window.electronFront.guardarInformacion();
     }
 
-
   return (
    <>
-     <div direction="vertical" align="center">
+    <div direction="vertical" align="center">
     <Button onClick={llamarElectron} type="primary">Primary Button</Button>
     </div>
    </>

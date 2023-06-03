@@ -4,24 +4,16 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { Usuario } from './model/user.model'
 import { initDb } from './db/database'
-// Configura el directorio de datos de SQLite
 
-
-// Configura Sequelize con SQLite
-
-
-// Define un modelo simple para la tabla 'usuarios'
 
 
 const llamarNode = async (e,data) =>{
-  const {nombre,apellido,urlFoto} = data;
-const usuario = new Usuario(data);
+
+const usuario = new Usuario({...data});
 
 try {
   // Guarda el nuevo usuario en la base de datos
-  const usuarioGuardado = await Usuario.create(
-    usuario
-  );
+ const usuarioGuardado = await  usuario.save();
   
   console.log('Nuevo usuario guardado:', usuarioGuardado.toJSON());
 } catch (error) {
