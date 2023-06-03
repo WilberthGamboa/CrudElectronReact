@@ -5,8 +5,6 @@ import icon from '../../resources/icon.png?asset'
 import { Usuario } from './model/user.model'
 import { initDb } from './db/database'
 
-
-
 const llamarNode = async (e,data) =>{
 
 const usuario = new Usuario({...data});
@@ -20,10 +18,11 @@ try {
   console.error('Error al guardar el usuario:'+error);
 }
 }
-const obtenerUsuarioById = async() =>{
+const obtenerUsuarioById = async(e,index) =>{
   try{
-   const usuarioById = await Usuario.findByPk(1);
-   console.log(usuarioById);
+   const usuarioById = await Usuario.findByPk(index);
+   console.log(usuarioById)
+   return usuarioById;
   }catch(error){
    
   }
@@ -91,7 +90,7 @@ app.whenReady().then(() => {
   //ELECTRON LLAMADAS
 
 ipcMain.on('postData',llamarNode)
-ipcMain.on('getData',obtenerUsuarioById)
+ipcMain.handle('getData',obtenerUsuarioById)
 
 
 

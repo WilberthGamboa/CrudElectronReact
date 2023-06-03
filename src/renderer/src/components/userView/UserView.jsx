@@ -18,8 +18,16 @@ export const UserView = () => {
       urlFoto:'urlFoto'
     })
   }
-  const infoasync = async() =>{
-    await window.electronFront.obtenerInformacion();
+  const infoasync = async(value=1) =>{
+   const {dataValues} =  await window.electronFront.obtenerInformacion(value);
+    console.log(dataValues);
+   setusuarioData({
+   nombre:dataValues.nombre,
+   apellido:dataValues.apellido,
+   urlFoto:dataValues.urlFoto
+
+   })
+  
   }
   useEffect(() => {
     getDataUser();
@@ -30,11 +38,13 @@ export const UserView = () => {
   
   const siguiente = () => {
     setindex(index+1);
+    infoasync(index);
   }
 
   const anterior = () => {
     if(index==1) return;
     setindex(index-1);
+    infoasync(index);
   }
 
   
@@ -42,9 +52,10 @@ const {nombre,apellido,urlFoto} = usuarioData;
 
   return (
     <>
+ 
     <h1>{nombre}</h1>
     <h1>{apellido}</h1>
-    <img src="https://w0.peakpx.com/wallpaper/956/188/HD-wallpaper-gwen-lol-pc-league-of-legends-gwen.jpg" alt="" />
+    <img src={urlFoto} alt="No disponible" />
     <h1>index value: {index} </h1>
     <Button onClick={siguiente} >Siguiente</Button>
     <Button onClick={anterior}>Anterior</Button>
