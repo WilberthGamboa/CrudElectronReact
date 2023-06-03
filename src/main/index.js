@@ -2,13 +2,32 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { Usuario } from './model/user.model'
+import { initDb } from './db/database'
+// Configura el directorio de datos de SQLite
 
-const llamarNode = (e,data) =>{
-  console.log(data);
+
+// Configura Sequelize con SQLite
+
+
+// Define un modelo simple para la tabla 'usuarios'
+
+
+const llamarNode = async (e,data) =>{
+  const {nombre,apellido,urlFoto} = data;
+const usuario = new Usuario(data);
+
+try {
+  // Guarda el nuevo usuario en la base de datos
+  const usuarioGuardado = await Usuario.create(
+    usuario
+  );
+  
+  console.log('Nuevo usuario guardado:', usuarioGuardado.toJSON());
+} catch (error) {
+  console.error('Error al guardar el usuario:');
 }
-
-
-
+}
 
 function createWindow() {
   // Create the browser window.
@@ -47,6 +66,8 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+
+  initDb();
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
 
@@ -66,7 +87,7 @@ app.whenReady().then(() => {
   })
   //ELECTRON LLAMADAS
 
-  //ipcMain.on('postData',llamarNode)
+ipcMain.on('postData',llamarNode)
 
 
 

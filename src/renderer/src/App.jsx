@@ -11,44 +11,42 @@ import { FormMercanciaVendida } from "./components/FormMercanciaVendida";
 function App() {
 
   const [values, setvalues] = useState({
-    producto1: 'soy el pruducto 1',
-    producto2:'soy el pruducto 2',
-    producto3: 'soy el pruducto 3'
+    nombre: '',
+    apellido:'',
+    urlFoto: ''
   })
 
-  const {producto1, producto2, producto3} = values;
+  const {nombre, apellido, urlFoto} = values;
   const onChange = ({target}) => {
     const {name,value} = target;
     setvalues({
       ...values,
       [name]:value
     })
-    console.log(value)
-  
+   
   };
-  const onSave = () =>{
-    
-    console.log(values)
-
+  const onSave = async (values) =>{
+    console.log(values);
+    await window.electronFront.guardarInformacion(values)
   }
   return (
     <>
     <Title direction="vertical" align="center">Simple crud</Title>
     <Row justify="center" align="middle" style={{ height: '70vh' }}>
       <Col span={12}>
-        <Input showCount maxLength={20} onChange={onChange} name="producto1" value={producto1} />
+        <Input showCount maxLength={20} onChange={onChange} name="nombre" value={nombre} />
         <br />
         <br />
-        <Input showCount maxLength={20} onChange={onChange} name="producto2" value={producto2} />
+        <Input showCount maxLength={20} onChange={onChange} name="apellido" value={apellido} />
         <br />
         <br />
-        <Input showCount maxLength={20} onChange={onChange} name="producto3"  value={producto3}/>
+        <Input showCount maxLength={20} onChange={onChange} name="urlFoto"  value={urlFoto}/>
         <br />
         <br />
       </Col>
     </Row>
     <div direction="vertical" align="center">
-    <Button  onClick={onSave} type="primary">Primary Button</Button>
+    <Button  onClick={()=>onSave(values)} type="primary">Primary Button</Button>
     </div>
 
 
