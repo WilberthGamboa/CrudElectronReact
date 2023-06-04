@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { useEffect, useState } from "react";
-
+import './style.css'
 export const UserView = () => {
 
   const [index, setindex] = useState(1)

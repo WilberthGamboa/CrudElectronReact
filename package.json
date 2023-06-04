@@ -17,6 +17,7 @@
     "build:linux": "npm run build && electron-builder --linux --config"
   },
   "dependencies": {
+    "@ant-design/colors": "^7.0.0",
     "@electron-toolkit/preload": "^1.0.3",
     "@electron-toolkit/utils": "^1.0.2",
     "antd": "^5.5.2",

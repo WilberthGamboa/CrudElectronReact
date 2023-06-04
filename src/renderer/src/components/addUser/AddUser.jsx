@@ -1,12 +1,27 @@
-import React from 'react'
+import { Content } from 'antd/es/layout/layout'
 import { FormMercanciaVendida } from './components/FormMercanciaVendida'
-import { TitleForm } from './components/TitleForm'
+import { Col, Row } from 'antd'
+
 
 export const AddUser = () => {
   return (
-    <>
-    <FormMercanciaVendida/>
+   <main>
+         <Row justify={'center'}>
+          <Col span={20} >
+          
+          <FormMercanciaVendida/>
+          </Col>
+         </Row>
+            
+            
+          
+
+         
     
-    </>
+    
+   </main>
+     
+   
+
   )
 }

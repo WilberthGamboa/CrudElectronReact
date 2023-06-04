@@ -2,6 +2,10 @@ import { useState } from "react";
 import { AddUser } from "./components/addUser/AddUser";
 import { TitleForm } from "./components/addUser/components/TitleForm";
 import { UserView } from "./components/userView/UserView";
+
+import './style.css';
+import Layout, { Header } from "antd/es/layout/layout";
+
 function App() {  
 
   const [visibilidad, setvisibilidad] = useState(false);
@@ -23,13 +27,20 @@ function App() {
     }
   }
   return (
+    
     <>
+  
+  <header className="headerAnt">
     <TitleForm onSetViewFalse={onSetViewFalse} onSetViewTrue={onSetViewTrue} />
+    </header>
+
+ 
+   
     {
      renderizarComponente()
 
     }
-    </>
+  </>
   )
 }
 
