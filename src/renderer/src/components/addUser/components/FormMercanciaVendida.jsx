@@ -1,8 +1,25 @@
 import { Button, Form, Input, Row } from "antd"
+import { SmileOutlined } from '@ant-design/icons';
+import { notification } from 'antd';
 import { useState } from "react"
 import './style.css'
 
 export const FormMercanciaVendida = () => {
+    const [api, contextHolder] = notification.useNotification();
+    const openNotification = () => {
+      api.open({
+        message: 'Datos guardados',
+        description:
+          'Los datos han sido guardado correctamente',
+        icon: (
+          <SmileOutlined
+            style={{
+              color: '#108ee9',
+            }}
+          />
+        ),
+      });
+    };
     const [inputValues, setinputValues] = useState({
         nombre: '',
         apellido: '',
@@ -16,7 +33,9 @@ export const FormMercanciaVendida = () => {
     }
 
     const onClick = async () => {
-        await window.electronFront.guardarInformacion(inputValues)
+        if(inputValues.nombre===''|| inputValues.apellido===''||inputValues.urlFoto==='')return
+        await window.electronFront.guardarInformacion(inputValues);
+        openNotification();
     }
     const layout = {
         labelCol: {
@@ -67,6 +86,8 @@ export const FormMercanciaVendida = () => {
             </Form.Item>
 
             <Form.Item wrapperCol={{ span: 8, offset: 8 }}>
+            {contextHolder}
+
                 <Button type="primary" htmlType="submit" onClick={onClick}>
                     Submit
                 </Button>

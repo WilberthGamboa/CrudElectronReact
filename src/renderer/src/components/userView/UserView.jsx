@@ -1,65 +1,78 @@
-import { Button } from "antd";
+import { Button, Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import './style.css'
+import Title from "antd/es/typography/Title";
+
 export const UserView = () => {
 
   const [index, setindex] = useState(1)
 
   const [usuarioData, setusuarioData] = useState({
-    nombre:'',
-    apellido:'',
-    urlFoto:''
+    nombre: '',
+    apellido: '',
+    urlFoto: ''
   })
 
-  const getDataUser = () =>{
+  const { nombre, apellido, urlFoto } = usuarioData;
+  const getDataUser = () => {
     setusuarioData({
-      nombre:'nombre',
-      apellido:'apellido',
-      urlFoto:'urlFoto'
+      nombre: 'nombre',
+      apellido: 'apellido',
+      urlFoto: 'urlFoto'
     })
   }
-  const infoasync = async(value=1) =>{
-   const {dataValues} =  await window.electronFront.obtenerInformacion(value);
-    console.log(dataValues);
-   setusuarioData({
-   nombre:dataValues.nombre,
-   apellido:dataValues.apellido,
-   urlFoto:dataValues.urlFoto
+  const infoasync = async (value = 1) => {
+    const data = await window.electronFront.obtenerInformacion(value);
+    console.log(data)
+    if (data === null) return false;
 
-   })
-  
+    const {dataValues} = data;
+    console.log(dataValues.nombre);
+    setusuarioData({
+      nombre: dataValues.nombre,
+      apellido: dataValues.apellido,
+      urlFoto: dataValues.urlFoto
+
+    })
+    return true;
   }
   useEffect(() => {
     getDataUser();
     infoasync();
-   
+
   }, [])
 
-  
-  const siguiente = () => {
-    setindex(index+1);
-    infoasync(index);
+
+  const siguiente = async () => {
+    const x = await infoasync(index + 1);
+    if (x) {
+      setindex(index + 1)
+    }
+
+
   }
 
   const anterior = () => {
-    if(index==1) return;
-    setindex(index-1);
+    if (index == 1) return;
+    setindex(index - 1);
     infoasync(index);
   }
 
-  
-const {nombre,apellido,urlFoto} = usuarioData;
+
 
   return (
     <>
- 
-    <h1>{nombre}</h1>
-    <h1>{apellido}</h1>
-    <img src={urlFoto} alt="No disponible" />
-    <h1>index value: {index} </h1>
-    <Button onClick={siguiente} >Siguiente</Button>
-    <Button onClick={anterior}>Anterior</Button>
+    <h1></h1>
+     
+    <Row>
+       <Col>
+       
+      <Title>{nombre} </Title>
+        </Col>
+      </Row>
+
+
     </>
-    
+
   )
 }
