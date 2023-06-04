@@ -4,7 +4,7 @@ import { notification } from 'antd';
 import { useState } from "react"
 import './style.css'
 
-export const FormMercanciaVendida = () => {
+export const AddUserForm = () => {
     const [api, contextHolder] = notification.useNotification();
     const openNotification = () => {
       api.open({

@@ -1,5 +1,6 @@
 import { Button, Col, Row } from "antd";
 import { useEffect, useState } from "react";
+import { Image } from 'antd';
 import './style.css'
 import Title from "antd/es/typography/Title";
 
@@ -66,12 +67,28 @@ export const UserView = () => {
      
     <Row>
        <Col>
-       
       <Title>{nombre} </Title>
         </Col>
-      </Row>
+    </Row>
+    <Row>
+       <Col>
+      <Title>{apellido} </Title>
+        </Col>
+    </Row>
+    <Row>
+       <Col>
+      <Image width={200} src={urlFoto}>
+    
+      </Image>
+        </Col>
+    </Row>
 
+<Row>
+<Col>
 
+</Col>
+
+</Row>
     </>
 
   )
