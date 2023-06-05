@@ -6,7 +6,7 @@ import { AddUser } from './components/addUser/AddUser';
 import { UserView } from './components/userView/UserView';
 
 function App() {  
-const {onSetViewFalse,onSetViewTrue,visibilidad} = useVisibility(); 
+const {onUserView,onAddUserView,visibilidad} = useVisibility(); 
 
 const renderizarComponente = () => {
   if (visibilidad) {
@@ -18,7 +18,8 @@ const renderizarComponente = () => {
 
   return (  
     <>
-    <TitleForm onSetViewFalse={onSetViewFalse} onSetViewTrue={onSetViewTrue} />
+    {/* EL el header de nuestra aplicación*/}
+    <TitleForm onUserView={onUserView} onAddUserView={onAddUserView}/>
     {
      renderizarComponente()
     }
